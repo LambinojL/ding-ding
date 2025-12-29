@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Driver Registration</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #f4f6f8; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    .container { background: white; padding: 30px; border-radius: 10px; width: 100%; max-width: 400px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    h2 { margin-bottom: 20px; text-align: center; color: #111827; }
+    input, label { width: 100%; margin-bottom: 12px; font-size: 14px; }
+    input { padding: 10px; border: 1px solid #d1d5db; border-radius: 5px; }
+    input:focus { outline: none; border-color: #2563eb; }
+    button { padding: 12px; width: 100%; background: #2563eb; border: none; color: white; font-size: 16px; border-radius: 5px; cursor: pointer; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    .message { margin-top: 15px; padding: 10px; border-radius: 5px; text-align: center; font-size: 14px; }
+    .message.error { background: #fee2e2; color: #dc2626; }
+    .message.success { background: #dcfce7; color: #16a34a; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Driver Registration</h2>
+    <form id="driverForm">
+      <input type="text" id="driverFirstName" placeholder="First Name" required />
+      <input type="text" id="driverLastName" placeholder="Last Name" required />
+      <input type="number" id="driverAge" placeholder="Age" min="18" required />
+      <input type="text" id="driverAddress" placeholder="Address" required />
+      <input type="email" id="driverEmail" placeholder="Email" required />
+      <input type="password" id="driverPassword" placeholder="Password" required />
+
+      <label for="vehiclePicture">Vehicle Picture:</label>
+      <input type="file" id="vehiclePicture" accept="image/*" required />
+
+      <label for="licenseFile">License Document:</label>
+      <input type="file" id="licenseFile" accept="image/*,application/pdf" required />
+
+      <label for="orCrFile">OR/CR Document:</label>
+      <input type="file" id="orCrFile" accept="image/*,application/pdf" required />
+
+      <button type="submit" id="registerDriverBtn">Register</button>
+      <div id="driverMessage" class="message"></div>
+    </form>
+  </div>
+
+  <script type="module" src="driver-register.js"></script>
+</body>
+</html>
