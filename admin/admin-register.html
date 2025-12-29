@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      background: #fff;
+      padding: 20px;
+      width: 300px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.1);
+    }
+    input, button, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    textarea {
+      resize: none;
+    }
+    button {
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: #fff;
+      padding: 25px;
+      width: 320px;
+      border-radius: 10px;
+      text-align: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal-content button {
+      margin-top: 20px;
+      padding: 10px;
+      width: 100%;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+      from {
+        transform: scale(0.95);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h3>Create Account</h3>
+
+  <input type="text" id="firstName" placeholder="First Name" required />
+  <input type="text" id="middleName" placeholder="Middle Name (optional)" />
+  <input type="text" id="lastName" placeholder="Last Name" required />
+
+  <input type="number" id="age" placeholder="Age" min="1" required />
+
+  <textarea id="address" placeholder="Address" rows="3" required></textarea>
+
+  <input type="email" id="email" placeholder="Email" required />
+  <input type="password" id="password" placeholder="Password" required />
+
+  <button id="registerBtn">Register</button>
+  <p id="message"></p>
+</div>
+
+<!-- Modal for email verification -->
+<div id="emailModal" class="modal">
+  <div class="modal-content">
+    <h2>📧 Verify your email</h2>
+    <p>
+      We’ve sent a confirmation link to your email.<br />
+      Please check your inbox and click the link to activate your account.
+    </p>
+    <button id="closeModal">OK</button>
+  </div>
+</div>
+
+<script type="module" src="admin-register.js"></script>
+</body>
+</html>

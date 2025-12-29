@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Driver Applicants</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      padding: 20px;
+      color: #111827;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #e5e7eb;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    th {
+      background: #111827;
+      color: white;
+    }
+
+    tr:hover {
+      background: #f9fafb;
+    }
+
+    a {
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .approve-btn {
+      padding: 6px 12px;
+      background: #16a34a;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+      margin-right: 6px;
+    }
+
+    .reject-btn {
+      padding: 6px 12px;
+      background: #ef4444;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .approve-btn:hover,
+    .reject-btn:hover {
+      opacity: 0.9;
+    }
+
+    .back-btn {
+      margin-bottom: 15px;
+      display: inline-block;
+      background: #2563eb;
+      color: white;
+      padding: 8px 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+ .add-driver-btn {
+  padding: 6px 14px;       /* rectangle padding */
+  border-radius: 6px;      /* slightly rounded corners */
+  border: none;
+  background: #2563eb;     /* blue background */
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;                /* space between plus and text */
+}
+
+.add-driver-btn:hover {
+  opacity: 0.9;
+}
+
+
+  </style>
+</head>
+<body>
+
+<a href="admin-dashboard.html" class="back-btn">← Back to Dashboard</a>
+
+<h2 style="display: flex; align-items: center; justify-content: space-between;">
+  Driver Applicants
+  <button id="addApplicantBtn" class="add-driver-btn" title="Add Driver">+ Add Driver</button>
+</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Address</th>
+      <th>Vehicle</th>
+      <th>License</th>
+      <th>OR/CR</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody id="applicantsTable">
+    <tr>
+      <td colspan="7">Loading applicants...</td>
+    </tr>
+  </tbody>
+</table>
+
+<script type="module" src="applicant.js"></script>
+</body>
+</html>

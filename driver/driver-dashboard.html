@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Driver Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding-bottom: 70px; /* Space for bottom nav */
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h2, h3 {
+      color: #111827;
+    }
+
+    .profile-card {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.1);
+      margin-bottom: 20px;
+    }
+
+    .profile-card img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    a {
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    button {
+      padding: 8px 16px;
+      background: #ef4444;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    /* Bottom Navigation Styles */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #dce4f5;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px 0;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+
+    .bottom-nav button {
+      background: none;
+      border: none;
+      color: #000000b3;
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .bottom-nav button.active,
+    .bottom-nav button:hover {
+      color: #2563eb;
+    }
+
+    .bottom-nav button span {
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .bottom-nav button img {
+      display: block;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h2>Driver Dashboard</h2>
+  <button id="logoutBtn">Logout</button>
+</header>
+
+<main>
+  <h3>Welcome, <span id="driverName">Driver</span> 👋</h3>
+
+  <div class="profile-card" id="driverProfile">
+    <p>Loading profile...</p>
+  </div>
+</main>
+
+<!-- Bottom Navigation -->
+<div class="bottom-nav">
+  <button id="navPickups">
+    <img src="../assets/parcel.png" alt="Pickups" width="24" height="24">
+    <span>Pickups</span>
+  </button>
+  <button id="navRecords">
+    <img src="../assets/keeping.png" alt="Records" width="24" height="24">
+    <span>Records</span>
+  </button>
+  <button id="navWallet">
+    <img src="../assets/wallet.png" alt="Wallet" width="24" height="24">
+    <span>Wallet</span>
+  </button>
+    <button id="navMission">
+    <img src="../assets/trophy-cup.png" alt="Mission" width="24" height="24">
+    <span>Mission</span>
+  </button>
+  <button class="active" id="navProfile">
+    <img src="../assets/user.png" alt="Profile" width="24" height="24">
+    <span>Profile</span>
+  </button>
+</div>
+<script type="module" src="driver-dashboard.js"></script>
+<script>
+  // Bottom navigation click handling
+  const navButtons = document.querySelectorAll('.bottom-nav button');
+  navButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      navButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      console.log(btn.id + ' clicked');
+      // Add page switching logic here if needed
+    });
+  });
+</script>
+
+</body>
+</html>
