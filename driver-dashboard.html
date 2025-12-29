@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Driver Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+    }
+    header {
+      background: #111827;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    main {
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    h2, h3 {
+      color: #111827;
+    }
+    .profile-card {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.1);
+      margin-bottom: 20px;
+    }
+    .profile-card img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    a {
+      color: #2563eb;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    button {
+      padding: 8px 16px;
+      background: #ef4444;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h2>Driver Dashboard</h2>
+  <button id="logoutBtn">Logout</button>
+</header>
+
+<main>
+  <h3>Welcome, <span id="driverName">Driver</span> 👋</h3>
+
+  <div class="profile-card" id="driverProfile">
+    <p>Loading profile...</p>
+  </div>
+</main>
+
+<script type="module">
+  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+  const SUPABASE_URL = "https://enjtpqiyflrscvvaeapd.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVuanRwcWl5Zmxyc2N2dmFlYXBkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY3NDk3NzgsImV4cCI6MjA4MjMyNTc3OH0.jHjpHPw9J4nhkspQ6HSpWa3lMnRg3i5xOSmhaMlpOqk"; // replace with your anon key
+  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const driverNameEl = document.getElementById("driverName");
+  const driverProfileEl = document.getElementById("driverProfile");
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  // Check if driver is logged in
+  async function loadDriverProfile() {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      // Redirect to login if not authenticated
+      window.location.href = "/driver/driver-login.html";
+      return;
+    }
+
+    // Fetch driver details from 'drivers' table
+    const { data: driver, error } = await supabase
+      .from("drivers")
+      .select("*")
+      .eq("user_id", user.id)
+      .single();
+
+    if (error) {
+      driverProfileEl.innerHTML = `<p style="color:#dc2626;">Failed to load profile</p>`;
+      console.error(error);
+      return;
+    }
+
+    driverNameEl.textContent = driver.first_name + " " + driver.last_name;
+
+    driverProfileEl.innerHTML = `
+      <p><strong>Age:</strong> ${driver.age}</p>
+      <p><strong>Address:</strong> ${driver.address}</p>
+      <p><strong>Status:</strong> ${driver.status}</p>
+      <p><strong>Vehicle:</strong> <a href="${driver.vehicle_picture}" target="_blank">View</a></p>
+      <p><strong>License:</strong> <a href="${driver.license_file}" target="_blank">View</a></p>
+      <p><strong>OR/CR:</strong> <a href="${driver.or_cr_file}" target="_blank">View</a></p>
+    `;
+  }
+
+  logoutBtn.addEventListener("click", async () => {
+    await supabase.auth.signOut();
+    window.location.href = "/driver/driver-login.html";
+  });
+
+  loadDriverProfile();
+</script>
+
+</body>
+</html>
